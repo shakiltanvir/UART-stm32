@@ -1,0 +1,12 @@
+/*
+ * uart_handler.c
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#include "uart_handler.h"
+
+
+uint8_t txbuff[BUFFER_SIZE];
+uint8_t rxbuff[BUFFER_SIZE];

@@ -1,0 +1,6 @@
+../Core/Src/uart_handler.c:21:6:uartCommInit	16	static
+../Core/Src/uart_handler.c:26:6:assignMasterData	24	static
+../Core/Src/uart_handler.c:34:6:sendMasterData	16	static
+../Core/Src/uart_handler.c:41:6:receiveSlaveData	16	static
+../Core/Src/uart_handler.c:48:6:HAL_UARTEx_RxEventCallback	24	static
+../Core/Src/uart_handler.c:62:6:HAL_UART_TxCpltCallback	16	static

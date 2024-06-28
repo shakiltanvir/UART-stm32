@@ -1,0 +1,66 @@
+00:27:53 **** Incremental Build of configuration Debug for project uart_master_g4 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/uart_handler.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart_handler.d" -MT"Core/Src/uart_handler.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart_handler.o"
+arm-none-eabi-gcc -o "uart_master_g4.elf" @"objects.list"   -mcpu=cortex-m4 -T"F:\Eembedded projects\UART stm32\Master\uart_master_g4\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_master_g4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uart_master_g4.elf
+ 
+arm-none-eabi-size  uart_master_g4.elf 
+arm-none-eabi-objdump -h -S uart_master_g4.elf  > "uart_master_g4.list"
+   text	   data	    bss	    dec	    hex	filename
+  22508	    112	   2320	  24940	   616c	uart_master_g4.elf
+Finished building: default.size.stdout
+ 
+Finished building: uart_master_g4.list
+ 
+00:27:57 **** Incremental Build of configuration Debug for project uart_master_g4 ****
+make -j12 all 
+arm-none-eabi-size  uart_master_g4.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22508	    112	   2320	  24940	   616c	uart_master_g4.elf
+Finished building: default.size.stdout
+ 
+00:28:36 **** Incremental Build of configuration Debug for project uart_master_g4 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/uart_handler.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart_handler.d" -MT"Core/Src/uart_handler.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart_handler.o"
+../Core/Src/uart_handler.c: In function 'sendMasterData':
+../Core/Src/uart_handler.c:38:9: error: too many arguments to function 'HAL_UART_Transmit_IT'
+   38 |         HAL_UART_Transmit_IT(huart, txbuff, sizeof(MasterDatatypedef), HAL_MAX_DELAY);
+      |         ^~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Inc/uart_handler.h:11,
+                 from ../Core/Src/uart_handler.c:8:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1636:19: note: declared here
+ 1636 | HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+      |                   ^~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/uart_handler.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:28:51 **** Incremental Build of configuration Debug for project uart_master_g4 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/uart_handler.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart_handler.d" -MT"Core/Src/uart_handler.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart_handler.o"
+arm-none-eabi-gcc -o "uart_master_g4.elf" @"objects.list"   -mcpu=cortex-m4 -T"F:\Eembedded projects\UART stm32\Master\uart_master_g4\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_master_g4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uart_master_g4.elf
+ 
+arm-none-eabi-size  uart_master_g4.elf 
+arm-none-eabi-objdump -h -S uart_master_g4.elf  > "uart_master_g4.list"
+   text	   data	    bss	    dec	    hex	filename
+  23352	    112	   2320	  25784	   64b8	uart_master_g4.elf
+Finished building: default.size.stdout
+ 
+Finished building: uart_master_g4.list
+ 
+00:29:23 **** Incremental Build of configuration Debug for project uart_master_g4 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/uart_handler.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart_handler.d" -MT"Core/Src/uart_handler.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart_handler.o"
+arm-none-eabi-gcc -o "uart_master_g4.elf" @"objects.list"   -mcpu=cortex-m4 -T"F:\Eembedded projects\UART stm32\Master\uart_master_g4\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_master_g4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uart_master_g4.elf
+ 
+arm-none-eabi-size  uart_master_g4.elf 
+arm-none-eabi-objdump -h -S uart_master_g4.elf  > "uart_master_g4.list"
+   text	   data	    bss	    dec	    hex	filename
+  23368	    112	   2320	  25800	   64c8	uart_master_g4.elf
+Finished building: default.size.stdout
+ 
+Finished building: uart_master_g4.list
+ 

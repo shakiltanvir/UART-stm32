@@ -1,0 +1,10 @@
+00:23:37 **** Incremental Build of configuration Debug for project uart_slave_g4 ****
+make -j12 all 
+arm-none-eabi-size  uart_slave_g4.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18872	     20	   1996	  20888	   5198	uart_slave_g4.elf
+Finished building: default.size.stdout
+ 
+
+00:23:37 Build Finished. 0 errors, 0 warnings. (took 247ms)
+

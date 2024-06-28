@@ -1,0 +1,46 @@
+/*
+ * uart_handler.c
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#ifndef SRC_UART_HANDLER_C_
+#define SRC_UART_HANDLER_C_
+
+#include "uart_handler.h"
+
+
+uint8_t txbuff[TX_BUFF_SIZE];
+uint8_t rxbuff[RX_BUFF_SIZE];
+
+typedef struct{
+	uint32_t first_header;
+	uint32_t device_id;
+	float temperature;
+	float humidity;
+	float lattitude;
+	float longitude;
+	uint32_t altitude;
+}Datatypedef;
+
+Datatypedef te
+
+void StructToBuffer(CustomData *data, uint8_t *buffer) {
+    // Copy the structure data into the buffer
+    memcpy(buffer, data, sizeof(CustomData));
+}
+
+void BufferToStruct(uint8_t *buffer, CustomData *data) {
+    // Copy the buffer data into the structure
+    memcpy(data, buffer, sizeof(CustomData));
+}
+
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
+
+
+
+}
+
+#endif /* SRC_UART_HANDLER_C_ */

@@ -1,0 +1,45 @@
+/*
+ * uart_handler.h
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#ifndef INC_UART_HANDLER_H_
+#define INC_UART_HANDLER_H_
+
+#include "main.h"
+
+#define RX_BUFF_SIZE 32
+#define TX_BUFF_SIZE 32
+
+
+extern uint8_t txbuff[TX_BUFF_SIZE];
+extern uint8_t rxbuff[RX_BUFF_SIZE];
+
+typedef struct{
+	uint32_t first_header;
+	uint32_t node_id;
+	uint32_t command_a;
+	uint32_t command_b;
+}MasterDatatypedef;
+
+extern MasterDatatypedef masterData;
+
+
+typedef struct{
+	uint32_t first_header;
+	uint32_t device_id;
+	float temperature;
+	float humidity;
+	float lattitude;
+	float longitude;
+	uint32_t altitude;
+}SlaveDatatypedef;
+
+extern SlaveDatatypedef slaveData;
+
+
+void sendMasterData(MasterDatatypedef *data, uint8_t *buff);
+
+#endif /* INC_UART_HANDLER_H_ */

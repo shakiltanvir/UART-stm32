@@ -1,0 +1,59 @@
+/*
+ * uart_handler.c
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#include "uart_handler.h"
+
+// Buffers for transmission and reception
+uint8_t txbuff[TX_BUFF_SIZE];
+uint8_t rxbuff[RX_BUFF_SIZE];
+
+// Master and slave data structures
+MasterDatatypedef masterData;
+SlaveDatatypedef slaveData;
+
+void uartCommInit(UART_HandleTypeDef *huart) {
+	// Initialize the UART receive interrupt
+	HAL_UART_Receive_IT(huart, rxbuff, RX_BUFF_SIZE);
+}
+
+void assignMasterData(MasterDatatypedef *data, uint32_t id, uint32_t a,
+		uint32_t b) {
+	data->first_header = 0xABCD1234; // Example header value
+	data->node_id = id;
+	data->command_a = a;
+	data->command_b = b;
+}
+
+void sendMasterData(UART_HandleTypeDef *huart, MasterDatatypedef *data) {
+	// Copy the master data to the transmission buffer
+	memcpy(txbuff, data, sizeof(MasterDatatypedef));
+	// Transmit the data over UART
+	HAL_UART_Transmit(huart, txbuff, sizeof(MasterDatatypedef), HAL_MAX_DELAY);
+}
+
+void receiveSlaveData(UART_HandleTypeDef *huart, SlaveDatatypedef *data) {
+	// Receive data over UART and store it in the reception buffer
+    HAL_UARTEx_ReceiveToIdle_IT(&huart1, rxbuff, RX_BUFF_SIZE);
+    // Copy the received data to the slave data structure
+	memcpy(data, rxbuff, sizeof(SlaveDatatypedef));
+}
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
+
+	if (huart->Instance == USART1) {
+		// Handle the received data
+
+		memcpy(&slaveData, rxbuff, sizeof(SlaveDatatypedef));
+		// Restart the UART receive interrupt
+		HAL_UARTEx_ReceiveToIdle_IT(&huart1, rxbuff, sizeof(rxbuff));
+	}
+
+}
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+	// Handle post-transmission actions if necessary
+}

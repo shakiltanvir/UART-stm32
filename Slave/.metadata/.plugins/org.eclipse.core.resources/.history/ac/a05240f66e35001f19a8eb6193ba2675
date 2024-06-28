@@ -1,0 +1,93 @@
+/*
+ * uart_handler.c
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#include "uart_handler.h"
+#include <string.h>
+
+// Buffers for transmission and reception
+uint8_t txbuff[TX_BUFF_SIZE];
+uint8_t rxbuff[RX_BUFF_SIZE];
+
+
+// Master and slave data structures
+MasterDatatypedef masterRxdata;
+SlaveDatatypedef slaveTxData;
+
+/**
+ * @brief Initializes UART communication.
+ * @param huart: UART handle
+ */
+void uartCommInit(UART_HandleTypeDef *huart) {
+    // Initialize the UART receive interrupt
+    HAL_UART_Receive_IT(huart, rxbuff, RX_BUFF_SIZE);
+}
+
+/**
+ * @brief Assigns data to the SlaveDatatypedef structure.
+ * @param data: Pointer to SlaveDatatypedef structure
+ * @param id: Device ID
+ * @param temp: Temperature
+ * @param hum: Humidity
+ * @param lat: Latitude
+ * @param lon: Longitude
+ * @param altitude: Altitude
+ */
+void assignSlaveData(SlaveDatatypedef *data, uint32_t id, float temp, float hum, float lat, float lon, uint32_t altitude) {
+    data->first_header = 0xABCD1234; // Example header value
+    data->device_id = id;
+    data->temperature = temp;
+    data->humidity = hum;
+    data->latitude = lat;
+    data->longitude = lon;
+    data->altitude = altitude;
+}
+
+/**
+ * @brief Sends the slave data over UART.
+ * @param huart: UART handle
+ * @param data: Pointer to SlaveDatatypedef structure
+ */
+void sendSlaveData(UART_HandleTypeDef *huart, SlaveDatatypedef *data) {
+    // Copy the slave data to the transmission buffer
+    memcpy(txbuff, data, sizeof(SlaveDatatypedef));
+    // Transmit the data over UART
+    HAL_UART_Transmit(huart, txbuff, sizeof(SlaveDatatypedef), HAL_MAX_DELAY);
+}
+
+/**
+ * @brief Receives the master data over UART.
+ * @param huart: UART handle
+ * @param data: Pointer to MasterDatatypedef structure
+ */
+void receiveMasterData(UART_HandleTypeDef *huart, MasterDatatypedef *data) {
+    // Receive data over UART and store it in the reception buffer
+    HAL_UART_Receive(huart, rxbuff, sizeof(MasterDatatypedef), HAL_MAX_DELAY);
+    // Copy the received data to the master data structure
+    memcpy(data, rxbuff, sizeof(MasterDatatypedef));
+}
+
+/**
+ * @brief Callback function for UART receive interrupt.
+ * @param huart: UART handle
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (huart->Instance == USART1){
+	    // Handle the received data
+	    memcpy(&masterRxdata, rxbuff, sizeof(MasterDatatypedef));
+	    // Restart the UART receive interrupt
+	    HAL_UART_Receive_IT(huart, rxbuff, sizeof(rxbuff));
+	}
+
+}
+
+/**
+ * @brief Callback function for UART transmit complete interrupt.
+ * @param huart: UART handle
+ */
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+    // Handle post-transmission actions if necessary
+}

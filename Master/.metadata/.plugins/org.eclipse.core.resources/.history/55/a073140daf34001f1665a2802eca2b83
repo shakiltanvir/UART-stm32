@@ -1,0 +1,21 @@
+/*
+ * uart_handler.h
+ *
+ *  Created on: Jun 7, 2024
+ *      Author: USER
+ */
+
+#ifndef INC_UART_HANDLER_H_
+#define INC_UART_HANDLER_H_
+
+#include "main.h"
+
+#define RX_BUFF_SIZE 32
+#define TX_BUFF_SIZE 32
+
+
+extern uint8_t txbuff[TX_BUFF_SIZE];
+extern uint8_t rxbuff[RX_BUFF_SIZE];
+
+
+#endif /* INC_UART_HANDLER_H_ */
